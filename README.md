@@ -107,8 +107,8 @@ set_mysql_tmp_dir.sh
 
 ### fstab for cn04
 
-I used localflock when mounting lustre filesystem in case file lock is 
-needed in softwares like MySQL.
+Some software like mysql used file lock which is not supported by lustre
+by default. Therefore, I used localflock when mounting lustre filesystem.
 
 Default space for /tmp and /var is very low. So I mount two directory 
 from local space to those two system directories.
