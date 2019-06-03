@@ -66,7 +66,8 @@ shutdown now
 
 ### Step 1. Power on MGT and OST
 
-Press the power button of MGT (first) and OST nodes.
+Press the power button of MGT (first) and OST nodes. 
+Then the rest nodes.
 
 ### Step 2. Remount lustre FS and  enabling SGE queues 
 
