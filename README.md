@@ -118,6 +118,9 @@ $cat /etc/fstab
 172.1.1.100@tcp:/lustre                   /lustre                 lustre  defaults,_netdev,localflock        0 0
 /state/partition1/tmp                     /tmp                    none    defaults,bind   0 0
 /state/partition1/var                     /var                    none    defaults,bind   0 0
+
+## or directly use mount command
+mount --bind /state/partition1/tmp /tmp
 ```
 
 
