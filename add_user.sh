@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#Quota for local filesystem, default 1G
+LOCALQUOTA=1048576
+#Quota for lustre filesystem, default 5T
+LFSSOFTQUOTA='4900G'
+LFSHARDQUOTA='5T'
+
 echo -e "User Name?"
 
 read User
@@ -21,10 +27,8 @@ echo "${PASSWORD}" | passwd "$User" --stdin
 #1G, 1048576
 #setquota -u -F vfsv0 bob 1048576 1048576 1000000 1000000 /
 #首先设置本地quota
-setquota -u $User 1048576 1048576 100000 200000 /
+setquota -u $User ${LOCALQUOTA} ${LOCALQUOTA} 100000 200000 /
 repquota /
-#然后设置lustre quota
-#lfs setquota -u $User -b 499G -B 500G -i 100000 -I 110000 /lustre 
 
 #不再同步/etc/shadow，仅通过sge提交任务
 #rocks sync users
@@ -39,7 +43,7 @@ done
 
 
 #设置lustre的quota
-lfs setquota -u $User  -b 4900G -B 5T  /lustre 
+lfs setquota -u $User  -b ${LFSSOFTQUOTA} -B ${LFSHARDQUOTA}  /lustre 
 lfs quota -u  $User /lustre/
 
 #改权限
