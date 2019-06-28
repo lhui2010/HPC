@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 #Quota for local filesystem, default 1G
 LOCALQUOTA=1048576
 #Quota for lustre filesystem, default 5T
@@ -14,7 +16,13 @@ echo -e "Department?"
 
 read Dep
 
-groupadd $Dep
+if [ `getent group |grep ${Dep}` ]
+then
+        echo "Found"
+else
+        groupadd $Dep
+fi
+
 
 mkdir /lustre/home/${User}
 chmod 755 /lustre/home/${User}
